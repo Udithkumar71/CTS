@@ -1,385 +1,315 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Local Community Event Portal for residents to register, explore programs, and find nearby events.">
-    <title>Local Community Event Portal</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        /* Internal styling kept for the welcome banner requirement. */
-        #welcomeBanner {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-            align-items: center;
-            justify-content: space-between;
-            padding: 1.2rem 1.4rem;
-            margin: 1.5rem auto 0;
-            border-radius: 1rem;
-            background: linear-gradient(135deg, #0a4ea3, #155fc7);
-            color: #fff;
-            box-shadow: 0 18px 40px rgba(11, 53, 121, 0.18);
-        }
-        .banner-offer {
-            color: #ff5d5d;
-            font-weight: 800;
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Local Community Event Portal for residents to view, filter, and register for events.">
+  <title>Local Community Event Portal</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* Internal style requirement: body background */
+    body{ background-color:#f4f7fb; }
+
+    /* Internal style requirement: welcome banner */
+    #welcomeBanner{
+      display:flex;
+      flex-wrap:wrap;
+      gap:0.75rem;
+      align-items:center;
+      justify-content:space-between;
+      padding:1.2rem 1.4rem;
+      margin:1.5rem auto 0;
+      border-radius:1rem;
+      background:linear-gradient(135deg,#0a4ea3,#155fc7);
+      color:#fff;
+      box-shadow:0 18px 40px rgba(11,53,121,0.18);
+      max-width:1100px;
+    }
+    .banner-offer{ color:#ff5d5d; font-weight:800; }
+  </style>
 </head>
 <body>
-    <div id="pageLoader" class="loader" aria-hidden="true">
-        <div class="loader__ring"></div>
-        <p>Loading community portal...</p>
+  <div id="pageLoader" class="loader" aria-hidden="true">
+    <div class="loader__ring"></div>
+    <p>Loading community portal...</p>
+  </div>
+
+  <a class="skip-link" href="#mainContent">Skip to content</a>
+
+  <header class="site-header" id="home">
+    <nav class="navbar">
+      <a class="brand" href="#home" aria-label="Community Event Portal home">
+        <span class="brand__mark">CE</span>
+        <span class="brand__text">Community Event Portal</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="primaryNav">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-menu" id="primaryNav">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#events">Events</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#register">Register</a></li>
+        <li><a href="#feedback">Feedback</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Inline CSS demo heading -->
+  <h1 style="color:red;text-align:center;margin:1rem 0;">Community Portal</h1>
+
+  <main id="mainContent">
+    <section class="hero section-reveal">
+      <div class="hero__overlay"></div>
+      <div class="container hero__content">
+        <p class="eyebrow">City Council Community Hub</p>
+        <h1>Welcome to the Local Community Event Portal</h1>
+        <p class="hero__subtitle">Connecting Residents Through Events and Activities</p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="#register">Register Now</a>
+          <a class="btn btn--ghost" href="#events">Explore Events</a>
+        </div>
+      </div>
+    </section>
+
+    <div id="welcomeBanner" class="section-reveal">
+      <div>
+        <h2>Welcome Back, Resident!</h2>
+        <p>Free entry for first 100 registrations!</p>
+      </div>
+      <div class="banner-offer">Limited-time community offer</div>
     </div>
 
-    <a class="skip-link" href="#mainContent">Skip to content</a>
+    <section id="events" class="section container section-reveal">
+      <div class="section-heading">
+        <h2>Upcoming Events</h2>
+        <p>Filter, search, and register for community activities.</p>
+      </div>
 
-    <header class="site-header" id="home">
-        <nav class="navbar">
-            <a class="brand" href="#home" aria-label="Community Event Portal home">
-                <span class="brand__mark">CE</span>
-                <span class="brand__text">Community Event Portal</span>
-            </a>
-            <button class="nav-toggle" id="navToggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="primaryNav">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <ul class="nav-menu" id="primaryNav">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#events">Events</a></li>
-                <li><a href="#gallery">Gallery</a></li>
-                <li><a href="#register">Register</a></li>
-                <li><a href="#feedback">Feedback</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+      <div class="controls-grid">
+        <label>
+          Category
+          <select id="categoryFilter">
+            <option value="all">All Categories</option>
+            <option value="music">Music</option>
+            <option value="sports">Sports</option>
+            <option value="workshop">Workshop</option>
+            <option value="food">Food</option>
+          </select>
+        </label>
+        <label>
+          Location
+          <select id="locationFilter">
+            <option value="all">All Locations</option>
+            <option value="north">North District</option>
+            <option value="central">Central Park</option>
+            <option value="south">South Hall</option>
+          </select>
+        </label>
+        <label>
+          Search
+          <input id="searchInput" type="search" placeholder="Search events by name or category">
+        </label>
+        <button id="loadApiEvents" class="btn btn--primary" type="button">Load API Events</button>
+      </div>
 
-    <main id="mainContent">
-        <section class="hero section-reveal">
-            <div class="hero__overlay"></div>
-            <div class="container hero__content">
-                <p class="eyebrow">City Council Community Hub</p>
-                <h1>Welcome to the Local Community Event Portal</h1>
-                <p class="hero__subtitle">Connecting Residents Through Events and Activities</p>
-                <div class="hero__actions">
-                    <a class="btn btn--primary" href="#register">Register Now</a>
-                    <a class="btn btn--ghost" href="#events">Explore Events</a>
-                </div>
-            </div>
-        </section>
+      <div id="loadingSpinner" class="loading-spinner" hidden>
+        <div class="spinner"></div>
+        <span>Loading events...</span>
+      </div>
 
-        <section class="container section-reveal">
-            <div id="welcomeBanner" class="welcome-banner" style="border: 1px solid rgba(255,255,255,0.18);">
-                <strong>Welcome Back, Resident!</strong>
-                <span class="banner-offer" style="text-decoration: underline;">Free entry for first 100 registrations!</span>
-            </div>
-        </section>
+      <div id="eventsGrid" class="events-grid" aria-live="polite"></div>
+      <div id="eventsMessage" class="message" aria-live="polite"></div>
+    </section>
 
-        <section class="container section-block section-reveal" id="events">
-            <div class="section-heading">
-                <p class="eyebrow">Event Categories</p>
-                <h2>Discover community programs designed for every resident.</h2>
-            </div>
-            <div class="card-grid categories-grid">
-                <article class="info-card category-card">
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 360'%3E%3Crect width='640' height='360' fill='%230a4ea3'/%3E%3Ccircle cx='120' cy='110' r='60' fill='%23fff2b3' opacity='.92'/%3E%3Cpath d='M70 230h500v60H70z' fill='%23ffffff' opacity='.12'/%3E%3Cpath d='M170 265c30-30 70-45 110-45s80 15 110 45' stroke='%23fff' stroke-width='14' fill='none' stroke-linecap='round'/%3E%3C/svg%3E" alt="Music events illustration" title="Music Events">
-                    <div class="card-content">
-                        <h3>Music Events</h3>
-                        <p>Live performances, open mics, and cultural nights that bring the city together.</p>
-                        <button class="btn btn--small">View Details</button>
-                    </div>
-                </article>
-                <article class="info-card category-card">
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 360'%3E%3Crect width='640' height='360' fill='%23155fc7'/%3E%3Cpath d='M120 260h400' stroke='%23fff' stroke-width='14' stroke-linecap='round'/%3E%3Ccircle cx='200' cy='150' r='42' fill='%23ffffff' opacity='.9'/%3E%3Cpath d='M260 150h160' stroke='%23fff' stroke-width='12' stroke-linecap='round'/%3E%3C/svg%3E" alt="Sports events illustration" title="Sports Events">
-                    <div class="card-content">
-                        <h3>Sports Events</h3>
-                        <p>Community runs, matches, and fitness drives for active lifestyles.</p>
-                        <button class="btn btn--small">View Details</button>
-                    </div>
-                </article>
-                <article class="info-card category-card">
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 360'%3E%3Crect width='640' height='360' fill='%23054b8b'/%3E%3Cpath d='M120 240h400' stroke='%23fff' stroke-width='12' stroke-linecap='round'/%3E%3Crect x='220' y='100' width='200' height='110' rx='18' fill='%23ffffff' opacity='.88'/%3E%3C/svg%3E" alt="Food festivals illustration" title="Food Festivals">
-                    <div class="card-content">
-                        <h3>Food Festivals</h3>
-                        <p>Taste local flavors through seasonal markets, chef demos, and family dining festivals.</p>
-                        <button class="btn btn--small">View Details</button>
-                    </div>
-                </article>
-                <article class="info-card category-card">
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 360'%3E%3Crect width='640' height='360' fill='%230e63b8'/%3E%3Cpath d='M180 250l60-150 60 150 60-120 60 120' stroke='%23fff' stroke-width='12' fill='none' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E" alt="Cultural programs illustration" title="Cultural Programs">
-                    <div class="card-content">
-                        <h3>Cultural Programs</h3>
-                        <p>Celebrate traditions, heritage shows, and city-led cultural workshops.</p>
-                        <button class="btn btn--small">View Details</button>
-                    </div>
-                </article>
-                <article class="info-card category-card">
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 360'%3E%3Crect width='640' height='360' fill='%2308437f'/%3E%3Ccircle cx='320' cy='160' r='72' fill='%23ffffff' opacity='.9'/%3E%3Cpath d='M250 258h140' stroke='%23fff' stroke-width='12' stroke-linecap='round'/%3E%3C/svg%3E" alt="Workshops illustration" title="Workshops">
-                    <div class="card-content">
-                        <h3>Workshops</h3>
-                        <p>Skill-building sessions covering art, business, health, and digital literacy.</p>
-                        <button class="btn btn--small">View Details</button>
-                    </div>
-                </article>
-                <article class="info-card category-card">
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 360'%3E%3Crect width='640' height='360' fill='%23154b9f'/%3E%3Cpath d='M120 230h400' stroke='%23fff' stroke-width='12' stroke-linecap='round'/%3E%3Ccircle cx='210' cy='145' r='34' fill='%23fff' opacity='.95'/%3E%3Ccircle cx='430' cy='145' r='34' fill='%23fff' opacity='.95'/%3E%3C/svg%3E" alt="Social awareness programs illustration" title="Social Awareness Programs">
-                    <div class="card-content">
-                        <h3>Social Awareness Programs</h3>
-                        <p>Community campaigns focused on safety, environment, inclusivity, and wellness.</p>
-                        <button class="btn btn--small">View Details</button>
-                    </div>
-                </article>
-            </div>
-        </section>
+    <section id="gallery" class="section container section-reveal">
+      <div class="section-heading">
+        <h2>Event Gallery</h2>
+        <p>Double-click an image to enlarge it.</p>
+      </div>
+      <table class="gallery-table" aria-label="Event gallery">
+        <tbody>
+          <tr>
+            <td><figure class="gallery-item"><img src="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%231e6fb3'/%3E%3Ccircle cx='640' cy='140' r='90' fill='white' fill-opacity='.12'/%3E%3Ccircle cx='180' cy='420' r='120' fill='white' fill-opacity='.08'/%3E%3Crect x='90' y='370' width='620' height='110' rx='24' fill='white' fill-opacity='.15'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='white' font-family='Arial' font-size='40' font-weight='700'%3ECommunity Event%3C/text%3E%3C/svg%3E" alt="Marathon" title="Marathon" data-caption="Marathon"><figcaption>Marathon</figcaption></figure></td>
+            <td><figure class="gallery-item"><img src="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%231e6fb3'/%3E%3Ccircle cx='640' cy='140' r='90' fill='white' fill-opacity='.12'/%3E%3Ccircle cx='180' cy='420' r='120' fill='white' fill-opacity='.08'/%3E%3Crect x='90' y='370' width='620' height='110' rx='24' fill='white' fill-opacity='.15'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='white' font-family='Arial' font-size='40' font-weight='700'%3ECommunity Event%3C/text%3E%3C/svg%3E" alt="Music Fest" title="Music Fest" data-caption="Music Fest"><figcaption>Music Fest</figcaption></figure></td>
+            <td><figure class="gallery-item"><img src="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%231e6fb3'/%3E%3Ccircle cx='640' cy='140' r='90' fill='white' fill-opacity='.12'/%3E%3Ccircle cx='180' cy='420' r='120' fill='white' fill-opacity='.08'/%3E%3Crect x='90' y='370' width='620' height='110' rx='24' fill='white' fill-opacity='.15'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='white' font-family='Arial' font-size='40' font-weight='700'%3ECommunity Event%3C/text%3E%3C/svg%3E" alt="Tree Plantation" title="Tree Plantation" data-caption="Tree Plantation"><figcaption>Tree Plantation</figcaption></figure></td>
+          </tr>
+          <tr>
+            <td><figure class="gallery-item"><img src="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%231e6fb3'/%3E%3Ccircle cx='640' cy='140' r='90' fill='white' fill-opacity='.12'/%3E%3Ccircle cx='180' cy='420' r='120' fill='white' fill-opacity='.08'/%3E%3Crect x='90' y='370' width='620' height='110' rx='24' fill='white' fill-opacity='.15'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='white' font-family='Arial' font-size='40' font-weight='700'%3ECommunity Event%3C/text%3E%3C/svg%3E" alt="Food Carnival" title="Food Carnival" data-caption="Food Carnival"><figcaption>Food Carnival</figcaption></figure></td>
+            <td><figure class="gallery-item"><img src="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%231e6fb3'/%3E%3Ccircle cx='640' cy='140' r='90' fill='white' fill-opacity='.12'/%3E%3Ccircle cx='180' cy='420' r='120' fill='white' fill-opacity='.08'/%3E%3Crect x='90' y='370' width='620' height='110' rx='24' fill='white' fill-opacity='.15'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='white' font-family='Arial' font-size='40' font-weight='700'%3ECommunity Event%3C/text%3E%3C/svg%3E" alt="Dance Competition" title="Dance Competition" data-caption="Dance Competition"><figcaption>Dance Competition</figcaption></figure></td>
+            <td><figure class="gallery-item"><img src="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%231e6fb3'/%3E%3Ccircle cx='640' cy='140' r='90' fill='white' fill-opacity='.12'/%3E%3Ccircle cx='180' cy='420' r='120' fill='white' fill-opacity='.08'/%3E%3Crect x='90' y='370' width='620' height='110' rx='24' fill='white' fill-opacity='.15'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='white' font-family='Arial' font-size='40' font-weight='700'%3ECommunity Event%3C/text%3E%3C/svg%3E" alt="Awareness Rally" title="Awareness Rally" data-caption="Awareness Rally"><figcaption>Awareness Rally</figcaption></figure></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
 
-        <section class="container section-block section-reveal" id="gallery">
-            <div class="section-heading">
-                <p class="eyebrow">Event Gallery</p>
-                <h2>Hover over the gallery and double-click any image to enlarge it.</h2>
-            </div>
-            <div class="table-wrap">
-                <table class="gallery-table">
-                    <tbody>
-                        <tr>
-                            <td>
-                                <figure class="gallery-item">
-                                    <img class="gallery-image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 420'%3E%3Crect width='640' height='420' fill='%230a4ea3'/%3E%3Cpath d='M70 300h500' stroke='%23fff' stroke-width='14' stroke-linecap='round'/%3E%3Ccircle cx='170' cy='160' r='55' fill='%23fff0a6'/%3E%3Cpath d='M290 120l70 80-70 80-70-80z' fill='%23ffffff' opacity='.9'/%3E%3C/svg%3E" alt="Marathon community event" title="Marathon">
-                                    <figcaption>Marathon</figcaption>
-                                </figure>
-                            </td>
-                            <td>
-                                <figure class="gallery-item">
-                                    <img class="gallery-image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 420'%3E%3Crect width='640' height='420' fill='%23155fc7'/%3E%3Cpath d='M100 250h440' stroke='%23fff' stroke-width='12' stroke-linecap='round'/%3E%3Cpath d='M170 100h300l-50 70H220z' fill='%23ffffff' opacity='.9'/%3E%3C/svg%3E" alt="Music festival event" title="Music Fest">
-                                    <figcaption>Music Fest</figcaption>
-                                </figure>
-                            </td>
-                            <td>
-                                <figure class="gallery-item">
-                                    <img class="gallery-image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 420'%3E%3Crect width='640' height='420' fill='%230a4ea3'/%3E%3Ccircle cx='320' cy='170' r='78' fill='%23dff6d8'/%3E%3Cpath d='M320 250v100' stroke='%23fff' stroke-width='12' stroke-linecap='round'/%3E%3C/svg%3E" alt="Tree plantation event" title="Tree Plantation">
-                                    <figcaption>Tree Plantation</figcaption>
-                                </figure>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <figure class="gallery-item">
-                                    <img class="gallery-image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 420'%3E%3Crect width='640' height='420' fill='%230b5ab9'/%3E%3Crect x='140' y='110' width='360' height='160' rx='24' fill='%23fff1d6'/%3E%3C/svg%3E" alt="Food carnival event" title="Food Carnival">
-                                    <figcaption>Food Carnival</figcaption>
-                                </figure>
-                            </td>
-                            <td>
-                                <figure class="gallery-item">
-                                    <img class="gallery-image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 420'%3E%3Crect width='640' height='420' fill='%23155fc7'/%3E%3Cpath d='M160 280l70-140 70 140 70-100 70 100' stroke='%23fff' stroke-width='12' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" alt="Dance competition event" title="Dance Competition">
-                                    <figcaption>Dance Competition</figcaption>
-                                </figure>
-                            </td>
-                            <td>
-                                <figure class="gallery-item">
-                                    <img class="gallery-image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 420'%3E%3Crect width='640' height='420' fill='%23085488'/%3E%3Cpath d='M100 260h440' stroke='%23fff' stroke-width='12' stroke-linecap='round'/%3E%3Ccircle cx='240' cy='150' r='42' fill='%23fff' opacity='.9'/%3E%3Ccircle cx='400' cy='150' r='42' fill='%23fff' opacity='.9'/%3E%3C/svg%3E" alt="Awareness rally event" title="Awareness Rally">
-                                    <figcaption>Awareness Rally</figcaption>
-                                </figure>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="image-modal" id="imageModal" aria-hidden="true">
-                <img id="modalImage" alt="Enlarged gallery preview">
-            </div>
-        </section>
+    <section id="register" class="section container section-reveal">
+      <div class="section-heading">
+        <h2>Register for an Event</h2>
+        <p>Complete the form and submit your registration.</p>
+      </div>
+      <div class="form-card">
+        <form id="regForm" novalidate>
+          <div class="form-grid">
+            <label>Full Name <input type="text" id="fullName" name="fullName" placeholder="Your full name" required autofocus></label>
+            <label>Email Address <input type="email" id="email" name="email" placeholder="you@example.com" required></label>
+            <label>Phone Number <input type="tel" id="phone" name="phone" placeholder="9876543210" required onblur="validatePhone()"></label>
+            <label>Date of Event <input type="date" id="eventDate" name="eventDate" required></label>
+            <label>Event Type
+              <select id="eventType" name="eventType" required onchange="updateFee()">
+                <option value="">Select an event</option>
+                <option value="Music">Music</option>
+                <option value="Sports">Sports</option>
+                <option value="Workshop">Workshop</option>
+                <option value="Food Festival">Food Festival</option>
+                <option value="Other">Other</option>
+              </select>
+            </label>
+            <label>Number of Participants <input type="number" id="participants" name="participants" min="1" value="1" required></label>
+          </div>
+          <label>Address <input type="text" id="address" name="address" placeholder="Street, City, ZIP" required></label>
+          <label>Comments / Message <textarea id="comments" name="comments" rows="3" placeholder="Anything else you'd like us to know"></textarea></label>
+          <div class="fee-row">Event Fee: <output id="feeOutput">₹0</output></div>
+          <output id="registrationOutput" class="message" aria-live="polite"></output>
+          <div class="form-actions">
+            <button type="submit" class="btn btn--primary">Submit Registration</button>
+            <button type="reset" class="btn btn--ghost">Reset</button>
+          </div>
+        </form>
+      </div>
+    </section>
 
-        <section class="container section-block section-reveal" id="register">
-            <div class="section-heading">
-                <p class="eyebrow">Event Registration</p>
-                <h2>Reserve your place with a quick registration form.</h2>
-            </div>
-            <form class="portal-form card-panel" id="registrationForm" novalidate>
-                <div class="form-grid">
-                    <label>
-                        Full Name
-                        <input type="text" name="fullName" id="fullName" placeholder="Enter your full name" required autofocus>
-                    </label>
-                    <label>
-                        Email Address
-                        <input type="email" name="email" id="email" placeholder="Enter your email address" required>
-                    </label>
-                    <label>
-                        Phone Number
-                        <input type="tel" name="phone" id="phone" placeholder="10-digit mobile number" required onblur="validatePhoneField()">
-                    </label>
-                    <label>
-                        Date of Event
-                        <input type="date" name="eventDate" id="eventDate" required>
-                    </label>
-                    <label>
-                        Event Type
-                        <select name="eventType" id="eventType" required onchange="handleEventTypeChange()">
-                            <option value="">Select an event</option>
-                            <option value="Music">Music</option>
-                            <option value="Sports">Sports</option>
-                            <option value="Workshop">Workshop</option>
-                            <option value="Food Festival">Food Festival</option>
-                        </select>
-                    </label>
-                    <label>
-                        Number of Participants
-                        <input type="number" name="participants" id="participants" min="1" max="20" value="1" required>
-                    </label>
-                </div>
-                <label>
-                    Address
-                    <input type="text" name="address" id="address" placeholder="Your residential address" required>
-                </label>
-                <label>
-                    Comments / Message
-                    <textarea name="comments" id="comments" rows="4" placeholder="Share any special needs or questions"></textarea>
-                </label>
-                <div class="fee-row">
-                    <p>Selected fee: <output id="feeOutput">₹0</output></p>
-                    <p id="phoneFeedback" class="helper-text" aria-live="polite"></p>
-                </div>
-                <div class="form-actions">
-                    <button type="submit" class="btn btn--primary">Submit Registration</button>
-                    <output id="registrationOutput" class="status-output" aria-live="polite"></output>
-                </div>
-            </form>
-        </section>
+    <section id="feedback" class="section container section-reveal">
+      <div class="section-heading">
+        <h2>Event Feedback</h2>
+        <p>Rate your experience and share your opinion.</p>
+      </div>
+      <div class="feedback-card">
+        <label>Rating
+          <select id="rating" onchange="displayRating()">
+            <option value="">Select rating</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </label>
+          <article class="card">
+           <img src="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%231e6fb3'/%3E%3Ccircle cx='640' cy='140' r='90' fill='white' fill-opacity='.12'/%3E%3Ccircle cx='180' cy='420' r='120' fill='white' fill-opacity='.08'/%3E%3Crect x='90' y='370' width='620' height='110' rx='24' fill='white' fill-opacity='.15'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='white' font-family='Arial' font-size='40' font-weight='700'%3ECommunity Event%3C/text%3E%3C/svg%3E" alt="Music Events" />
+          <div>Characters: <span id="charCount">0</span>/500</div>
+          <div id="selectedRating">Rating: -</div>
+           <img src="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%231e6fb3'/%3E%3Ccircle cx='640' cy='140' r='90' fill='white' fill-opacity='.12'/%3E%3Ccircle cx='180' cy='420' r='120' fill='white' fill-opacity='.08'/%3E%3Crect x='90' y='370' width='620' height='110' rx='24' fill='white' fill-opacity='.15'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='white' font-family='Arial' font-size='40' font-weight='700'%3ECommunity Event%3C/text%3E%3C/svg%3E" alt="Sports Events" />
+        <div class="form-actions">
+          <button class="btn btn--primary" id="fbSubmit" type="button">Submit Feedback</button>
+           <img src="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%231e6fb3'/%3E%3Ccircle cx='640' cy='140' r='90' fill='white' fill-opacity='.12'/%3E%3Ccircle cx='180' cy='420' r='120' fill='white' fill-opacity='.08'/%3E%3Crect x='90' y='370' width='620' height='110' rx='24' fill='white' fill-opacity='.15'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='white' font-family='Arial' font-size='40' font-weight='700'%3ECommunity Event%3C/text%3E%3C/svg%3E" alt="Food Festivals" />
+      </div>
+    </section>
+           <img src="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%231e6fb3'/%3E%3Ccircle cx='640' cy='140' r='90' fill='white' fill-opacity='.12'/%3E%3Ccircle cx='180' cy='420' r='120' fill='white' fill-opacity='.08'/%3E%3Crect x='90' y='370' width='620' height='110' rx='24' fill='white' fill-opacity='.15'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='white' font-family='Arial' font-size='40' font-weight='700'%3ECommunity Event%3C/text%3E%3C/svg%3E" alt="Cultural Programs" />
+    <section id="promo" class="section container section-reveal">
+      <div class="section-heading">
+           <img src="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%231e6fb3'/%3E%3Ccircle cx='640' cy='140' r='90' fill='white' fill-opacity='.12'/%3E%3Ccircle cx='180' cy='420' r='120' fill='white' fill-opacity='.08'/%3E%3Crect x='90' y='370' width='620' height='110' rx='24' fill='white' fill-opacity='.15'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='white' font-family='Arial' font-size='40' font-weight='700'%3ECommunity Event%3C/text%3E%3C/svg%3E" alt="Workshops" />
+        <p>Watch the community highlights.</p>
+      </div>
+           <img src="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%231e6fb3'/%3E%3Ccircle cx='640' cy='140' r='90' fill='white' fill-opacity='.12'/%3E%3Ccircle cx='180' cy='420' r='120' fill='white' fill-opacity='.08'/%3E%3Crect x='90' y='370' width='620' height='110' rx='24' fill='white' fill-opacity='.15'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='white' font-family='Arial' font-size='40' font-weight='700'%3ECommunity Event%3C/text%3E%3C/svg%3E" alt="Social Awareness Programs" />
+        <video id="promoVideo" controls oncanplay="videoReady()" preload="metadata">
+          <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+        </video>
+        <div id="videoStatus">Video status: <span id="videoMsg">Loading...</span></div>
+      </div>
+    </section>
 
-        <section class="container section-block section-reveal" id="feedback">
-            <div class="section-heading">
-                <p class="eyebrow">Event Feedback</p>
-                <h2>Tell the council what you thought about the portal or your event experience.</h2>
-            </div>
-            <div class="feedback-panel card-panel">
-                <div class="form-grid feedback-grid">
-                    <label>
-                        Rating
-                        <select id="ratingSelect" onchange="updateRatingPreview()" onblur="validateFeedbackFields()">
-                            <option value="">Choose a rating</option>
-                            <option value="Excellent">Excellent</option>
-                            <option value="Very Good">Very Good</option>
-                            <option value="Good">Good</option>
-                            <option value="Needs Improvement">Needs Improvement</option>
-                        </select>
-                    </label>
-                    <label>
-                        Feedback Message
-                        <textarea id="feedbackText" rows="5" placeholder="Write your feedback here" onkeyup="updateCharacterCount()" onblur="validateFeedbackFields()"></textarea>
-                    </label>
-                </div>
-                <div class="fee-row">
-                    <p>Characters typed: <span id="characterCount">0</span></p>
-                    <p id="ratingPreview" class="helper-text">No rating selected yet.</p>
-                </div>
-                <div class="form-actions">
-                    <button type="button" class="btn btn--primary" id="submitFeedbackBtn" onclick="submitFeedback()">Submit Feedback</button>
-                    <output id="feedbackOutput" class="status-output" aria-live="polite"></output>
-                </div>
-            </div>
-        </section>
-
-        <section class="container section-block section-reveal" id="promo">
-            <div class="section-heading">
-                <p class="eyebrow">Promotional Video</p>
-                <h2>Watch a short preview of community events and city programs.</h2>
-            </div>
-            <div class="video-panel card-panel">
-                <video id="promoVideo" controls playsinline poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 960 540'%3E%3Crect width='960' height='540' fill='%230a4ea3'/%3E%3Ccircle cx='230' cy='160' r='96' fill='%23ffffff' opacity='.16'/%3E%3Ccircle cx='720' cy='360' r='136' fill='%23ffffff' opacity='.1'/%3E%3Cpath d='M420 200l160 100-160 100z' fill='%23ffffff' opacity='.92'/%3E%3C/svg%3E" oncanplay="videoReadyMessage()"></video>
-                <p id="videoStatus" class="helper-text" aria-live="polite"></p>
-            </div>
-        </section>
-
-        <section class="container section-block section-reveal" id="preferences">
-            <div class="section-heading">
-                <p class="eyebrow">User Preferences</p>
-                <h2>Save your preferred event type for faster registration next time.</h2>
-            </div>
-            <div class="preference-panel card-panel">
-                <label>
-                    Preferred Event Type
-                    <select id="preferenceSelect">
-                        <option value="">Choose a preference</option>
-                        <option value="Music">Music</option>
-                        <option value="Sports">Sports</option>
-                        <option value="Workshop">Workshop</option>
-                        <option value="Food Festival">Food Festival</option>
-                    </select>
-                </label>
-                <div class="form-actions">
-                    <button type="button" class="btn btn--primary" onclick="savePreference()">Save Preference</button>
-                    <button type="button" class="btn btn--ghost" onclick="clearPreferences()">Clear Preferences</button>
-                </div>
-                <p id="preferenceMessage" class="helper-text" aria-live="polite"></p>
-            </div>
-        </section>
-
-        <section class="container section-block section-reveal" id="nearby">
-            <div class="section-heading">
-                <p class="eyebrow">Nearby Events</p>
-                <h2>Use your current location to discover events happening nearby.</h2>
-            </div>
-            <div class="locator-panel card-panel">
-                <button type="button" class="btn btn--primary" onclick="findNearbyEvents()">Find Nearby Events</button>
-                <div class="location-grid">
-                    <p><strong>Latitude:</strong> <span id="latitudeValue">Not fetched yet</span></p>
-                    <p><strong>Longitude:</strong> <span id="longitudeValue">Not fetched yet</span></p>
-                </div>
-                <p id="locationStatus" class="helper-text" aria-live="polite"></p>
-            </div>
-        </section>
-
-        <section class="container section-block section-reveal" id="contact">
-            <div class="section-heading">
-                <p class="eyebrow">Contact</p>
-                <h2>Reach the council for program updates, venue questions, and support.</h2>
-            </div>
-            <div class="contact-grid">
-                <article class="info-card">
-                    <h3>City Council Office</h3>
-                    <p>12 Market Avenue, Downtown District</p>
-                    <p>Phone: +91 90000 12345</p>
-                    <p>Email: events@citycouncil.gov</p>
-                </article>
-                <article class="info-card">
-                    <h3>Quick Links</h3>
-                    <a href="#register">Register</a><br>
-                    <a href="#feedback">Submit Feedback</a><br>
-                    <a href="#nearby">Find Nearby Events</a>
-                </article>
-            </div>
-        </section>
-    </main>
-
-    <button id="scrollTopBtn" class="scroll-top" type="button" aria-label="Scroll to top">↑</button>
-
-    <footer class="site-footer">
-        <div class="container footer-grid">
-            <div>
-                <h3>Community Event Portal</h3>
-                <p>Building stronger local connections through accessible programs and public events.</p>
-            </div>
-            <div>
-                <h4>Contact Details</h4>
-                <p>Email: events@citycouncil.gov</p>
-                <p>Phone: +91 90000 12345</p>
-            </div>
-            <div>
-                <h4>Social Media</h4>
-                <div class="social-links">
-                    <a href="#" aria-label="Facebook">Facebook</a>
-                    <a href="#" aria-label="Instagram">Instagram</a>
-                    <a href="#" aria-label="X">X</a>
-                </div>
-            </div>
+    <section id="preferences" class="section container section-reveal">
+      <div class="section-heading">
+        <h2>User Preferences</h2>
+        <p>Save your preferred event type.</p>
+      </div>
+      <div class="prefs-card">
+        <label>Preferred Event Type
+          <select id="prefEvent">
+            <option value="">-- Select --</option>
+            <option>Music</option>
+            <option>Sports</option>
+            <option>Workshop</option>
+            <option>Food Festival</option>
+            <option>Other</option>
+          </select>
+        </label>
+        <div class="prefs-actions">
+          <button class="btn btn--primary" id="savePref" type="button">Save Preference</button>
+          <button class="btn btn--ghost" id="clearPref" type="button">Clear Preferences</button>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Local Community Event Portal. All rights reserved.</p>
-        </div>
-    </footer>
+        <div id="prefMsg" class="message" aria-live="polite"></div>
+      </div>
+    </section>
 
-    <script src="script.js" defer></script>
+    <section id="nearby" class="section container section-reveal">
+      <div class="section-heading">
+        <h2>Find Nearby Events</h2>
+        <p>Use your location to find nearby community programs.</p>
+      </div>
+      <div class="map-card">
+        <p>Click the button to share your location and find nearby events.</p>
+        <div class="geo-actions">
+          <button class="btn btn--primary" id="findNear" type="button">Find Nearby Events</button>
+          <div id="locationStatus">Location: <span id="latlon">Not found</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="news" class="section container section-reveal">
+      <div class="section-heading">
+        <h2>Community Bulletin</h2>
+        <p>Two-column text layout for city updates.</p>
+      </div>
+      <div class="news">
+        <p>Residents can now register for weekend workshops, seasonal food festivals, and awareness drives through the portal. Community teams are available to assist with registration and event updates.</p>
+        <p>The city council continues to invest in local parks, sports facilities, and cultural programs to encourage participation and strong neighborhood connections.</p>
+      </div>
+    </section>
+  </main>
+
+  <div id="imgModal" class="modal" aria-hidden="true">
+    <div class="modal-content">
+      <button class="modal-close" id="modalClose">×</button>
+      <img id="modalImg" src="" alt="Enlarged event image">
+      <div id="modalCaption"></div>
+    </div>
+  </div>
+
+  <button id="toTop" title="Scroll to top">↑</button>
+
+  <footer id="contact" class="site-footer">
+    <div class="footer-grid container">
+      <div>
+        <h3>Contact</h3>
+        <p>City Council Office<br>123 Main Street<br>contact@cityevents.local</p>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="#events">Events</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#register">Register</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Follow Us</h3>
+        <div class="socials">
+          <a href="#" aria-label="Facebook">●</a>
+          <a href="#" aria-label="Twitter">●</a>
+          <a href="#" aria-label="Instagram">●</a>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">© <span id="curYear"></span> Local Community Event Portal</div>
+  </footer>
+
+  <script src="main.js"></script>
 </body>
 </html>
